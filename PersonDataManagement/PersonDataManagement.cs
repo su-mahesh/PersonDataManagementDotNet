@@ -44,6 +44,14 @@ namespace PersonDataManagement
             Result.Clear();
             Result = RetrieveAllRecordsAgeBetween13And18(PersonList);
             ShowRecords(Result);
+
+            double AverageAge = RetrieveAverageAge(PersonList);
+            Console.WriteLine("Average ag: "+ AverageAge);
+        }
+
+        private static double RetrieveAverageAge(List<Person> PersonList)
+        {
+            return PersonList.Average(person => person.Age);
         }
 
         private static List<Person> RetrieveAllRecordsAgeBetween13And18(List<Person> PersonList)
