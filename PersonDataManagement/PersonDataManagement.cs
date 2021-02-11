@@ -51,9 +51,17 @@ namespace PersonDataManagement
             string SearchName = "Dipesh";
             bool CheckNameResult = CheckIfNamePresent(PersonList, SearchName);
             if(CheckNameResult)
-                Console.WriteLine(SearchName +" present in the list");
+                Console.WriteLine(SearchName +" is present in the list");
             else
-                Console.WriteLine(SearchName + " not present in the list");
+                Console.WriteLine(SearchName + " is not present in the list");
+
+            Result = SkipRecordsForAgeBelow60(PersonList);
+            ShowRecords(Result);
+        }
+
+        private static List<Person> SkipRecordsForAgeBelow60(List<Person> PersonList)
+        {
+            return PersonList.Where(person => person.Age >= 60).ToList();
         }
 
         private static bool CheckIfNamePresent(List<Person> PersonList, string SearchName)
