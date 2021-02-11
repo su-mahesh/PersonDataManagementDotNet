@@ -49,14 +49,14 @@ namespace PersonDataManagement
             Console.WriteLine("Average ag: "+ AverageAge);
 
             string SearchName = "Dipesh";
-            bool CheckNameResult = CheckIfNameExist(PersonList, SearchName);
+            bool CheckNameResult = CheckIfNamePresent(PersonList, SearchName);
             if(CheckNameResult)
-                Console.WriteLine(SearchName +" exists");
+                Console.WriteLine(SearchName +" present in the list");
             else
-                Console.WriteLine(SearchName + " doesn't exist");
+                Console.WriteLine(SearchName + " not present in the list");
         }
 
-        private static bool CheckIfNameExist(List<Person> PersonList, string SearchName)
+        private static bool CheckIfNamePresent(List<Person> PersonList, string SearchName)
         {
             return PersonList.Exists(person => person.Name.Equals(SearchName));
         }
