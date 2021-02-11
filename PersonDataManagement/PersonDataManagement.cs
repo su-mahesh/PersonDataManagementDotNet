@@ -47,6 +47,18 @@ namespace PersonDataManagement
 
             double AverageAge = RetrieveAverageAge(PersonList);
             Console.WriteLine("Average ag: "+ AverageAge);
+
+            string SearchName = "Dipesh";
+            bool CheckNameResult = CheckIfNameExist(PersonList, SearchName);
+            if(CheckNameResult)
+                Console.WriteLine(SearchName +" exists");
+            else
+                Console.WriteLine(SearchName + " doesn't exist");
+        }
+
+        private static bool CheckIfNameExist(List<Person> PersonList, string SearchName)
+        {
+            return PersonList.Exists(person => person.Name.Equals(SearchName));
         }
 
         private static double RetrieveAverageAge(List<Person> PersonList)
