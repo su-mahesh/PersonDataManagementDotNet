@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace PersonDataManagement
 {
@@ -12,24 +12,35 @@ namespace PersonDataManagement
             personList.Add(new Person() { SSN = 2, Name = "Dhanesh", Age = 24, Address = "Banglore" });
             personList.Add(new Person() { SSN = 3, Name = "Kaousr", Age = 75, Address = "Pune" });
             personList.Add(new Person() { SSN = 4, Name = "Moenei", Age = 18, Address = "Chennai" });
-            personList.Add(new Person() { SSN = 5, Name = "Itedite", Age = 24, Address = "Delhi" });
+            personList.Add(new Person() { SSN = 5, Name = "Itedite", Age = 59, Address = "Delhi" });
         }
         private static void ShowRecords(List<Person> PersonList)
         {
             foreach (Person Person in PersonList)
             {
-                Console.WriteLine(Person.SSN);
-                Console.WriteLine(Person.Name);
-                Console.WriteLine(Person.Age);
-                Console.WriteLine(Person.Address);
+                Console.WriteLine("SSN: "+ Person.SSN);
+                Console.WriteLine("Name: "+ Person.Name);
+                Console.WriteLine("Age: "+ Person.Age);
+                Console.WriteLine("Address: "+ Person.Address);
                 Console.WriteLine();
             }
+        }
+
+        static List<Person> RetrieveTop2RecordsBelow60(List<Person> PersonList)
+        {
+            PersonList.Sort((person1, person2) => person2.Age.CompareTo(person1.Age));
+            var result = PersonList.FindAll(person => person.Age < 60).Take(2).ToList();
+            return result;
         }
         static void Main(string[] args)
         {
             List<Person> PersonList = new List<Person>();
             AddPersonDetails(PersonList);
             ShowRecords(PersonList);
+
+            List<Person>  Result = RetrieveTop2RecordsBelow60(PersonList);
+            Console.WriteLine("Top 2 Records Below age 60");
+            ShowRecords(Result);
         }      
     }
 }
