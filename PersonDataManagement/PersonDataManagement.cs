@@ -57,6 +57,16 @@ namespace PersonDataManagement
 
             Result = SkipRecordsForAgeBelow60(PersonList);
             ShowRecords(Result);
+
+            string RemoveName = "Dhanesh";
+            RemoveSpecificNameFromList(PersonList, RemoveName);
+            ShowRecords(PersonList);
+        }
+
+        private static void RemoveSpecificNameFromList(List<Person> PersonList, string RemoveName)
+        {
+            var RemovePerson = PersonList.Where(person => person.Name.Equals(RemoveName)).First();
+            PersonList.Remove(RemovePerson);
         }
 
         private static List<Person> SkipRecordsForAgeBelow60(List<Person> PersonList)
