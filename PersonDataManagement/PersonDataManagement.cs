@@ -8,7 +8,7 @@ namespace PersonDataManagement
     {
         public static void AddPersonDetails(List<Person> personList)
         {
-            personList.Add(new Person() { SSN = 1, Name = "Dipesh", Age = 24, Address = "Mumbai" });
+            personList.Add(new Person() { SSN = 1, Name = "Dipesh", Age = 13, Address = "Mumbai" });
             personList.Add(new Person() { SSN = 2, Name = "Dhanesh", Age = 24, Address = "Banglore" });
             personList.Add(new Person() { SSN = 3, Name = "Kaousr", Age = 75, Address = "Pune" });
             personList.Add(new Person() { SSN = 4, Name = "Moenei", Age = 18, Address = "Chennai" });
@@ -26,7 +26,7 @@ namespace PersonDataManagement
             }
         }
 
-        static List<Person> RetrieveTop2RecordsBelow60(List<Person> PersonList)
+        static List<Person> RetrieveTop2RecordsAgeBelow60(List<Person> PersonList)
         {
             PersonList.Sort((person1, person2) => person2.Age.CompareTo(person1.Age));
             var result = PersonList.FindAll(person => person.Age < 60).Take(2).ToList();
@@ -38,9 +38,18 @@ namespace PersonDataManagement
             AddPersonDetails(PersonList);
             ShowRecords(PersonList);
 
-            List<Person>  Result = RetrieveTop2RecordsBelow60(PersonList);
+            List<Person>  Result = RetrieveTop2RecordsAgeBelow60(PersonList);
             Console.WriteLine("Top 2 Records Below age 60");
             ShowRecords(Result);
-        }      
+            Result.Clear();
+            Result = RetrieveAllRecordsAgeBetween13And18(PersonList);
+            ShowRecords(Result);
+        }
+
+        private static List<Person> RetrieveAllRecordsAgeBetween13And18(List<Person> PersonList)
+        {
+            PersonList.Sort((person1, person2) => person1.Age.CompareTo(person2.Age));
+            return PersonList.FindAll(person => person.Age >= 13 && person.Age <= 18);        
+        }
     }
 }
